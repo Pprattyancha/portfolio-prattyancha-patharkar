@@ -108,7 +108,7 @@ const MobileDrawer = ({
             }}
           >
             <IconButton
-              href="https://github.com/Pprattyancha"
+              href="https://github.com/Pprattyancha/Pprattyancha/blob/main/README.md"
               target="_blank"
               sx={{ color: "#fff" }}
             >
