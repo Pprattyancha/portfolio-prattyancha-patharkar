@@ -21,7 +21,9 @@ const MobileDrawer = ({
   handleNavigation,
   handleOpenResume,
   handleDownload,
+  activeItem
 }) => {
+
   return (
     <Drawer
       anchor="right"
@@ -30,9 +32,9 @@ const MobileDrawer = ({
       sx={{
         "& .MuiDrawer-paper": {
           width: 280,
-          backgroundColor: "rgba(15,23,42,.55)",
+          background:
+            "linear-gradient(177deg, rgb(35 60 120 / 85%), rgba(200, 214, 235, 0.6))",
           backdropFilter: "blur(18px)",
-          borderLeft: "1px solid rgba(255,255,255,0.15)",
           color: "#fff",
           display: "flex",
           flexDirection: "column",
@@ -40,7 +42,7 @@ const MobileDrawer = ({
       }}
     >
       <Box sx={{ p: 3, display: "flex", flexDirection: "column", height: "100%" }}>
-        
+
         {/* Logo */}
         <Typography
           className="portfolio-logo"
@@ -49,32 +51,43 @@ const MobileDrawer = ({
             handleNavigation({ path: "/", section: "home" })
           }
         >
-          P<span>P</span>
+          P<span style={{ color: "#9b86ce" }}>P</span>
         </Typography>
 
         {/* Menu */}
         <List>
-          {MenuItems.map((item, index) => (
-            <ListItemButton
-              key={item.path || index}
-              onClick={() => handleNavigation(item)}
-              sx={{
-                borderRadius: 2,
-                mb: 1,
-                "&:hover": {
-                  background: "rgba(99,102,241,.15)",
-                },
-              }}
-            >
-              <ListItemText
-                primary={item.label || item.section}
-                primaryTypographyProps={{
-                  fontSize: "18px",
-                  fontWeight: 600,
+          {MenuItems.map((item, index) => {
+            const isActive = activeItem === (item.section || item.label);
+
+            return (
+              <ListItemButton
+                key={item.path || index}
+                onClick={() => handleNavigation(item)}
+                sx={{
+                  borderRadius: 2,
+                  mb: 1,
+                  background: isActive
+                    ? "linear-gradient(90deg,#6366F1,#8B5CF6)"
+                    : "transparent",
+                  color: isActive ? "#fff" : "rgba(255,255,255,0.8)",
+
+                  "&:hover": {
+                    background: isActive
+                      ? "linear-gradient(90deg,#6366F1,#8B5CF6)"
+                      : "rgba(99,102,241,.15)",
+                  },
                 }}
-              />
-            </ListItemButton>
-          ))}
+              >
+                <ListItemText
+                  primary={item.label || item.section}
+                  primaryTypographyProps={{
+                    fontSize: "18px",
+                    fontWeight: isActive ? 700 : 500,
+                  }}
+                />
+              </ListItemButton>
+            );
+          })}
         </List>
 
         {/* Bottom Section */}
@@ -95,7 +108,7 @@ const MobileDrawer = ({
             }}
           >
             <IconButton
-              href="https://github.com/"
+              href="https://github.com/Pprattyancha"
               target="_blank"
               sx={{ color: "#fff" }}
             >
@@ -103,7 +116,7 @@ const MobileDrawer = ({
             </IconButton>
 
             <IconButton
-              href="https://linkedin.com/"
+              href="https://www.linkedin.com/in/prattyancha-patharkar/"
               target="_blank"
               sx={{ color: "#fff" }}
             >
@@ -117,8 +130,8 @@ const MobileDrawer = ({
             variant="contained"
             startIcon={<DescriptionIcon />}
             onClick={() => {
-              handleOpenResume(); // ✅ open modal
-              setOpen(false);     // ✅ close drawer
+              handleOpenResume();  
+              setOpen(false);  
             }}
             sx={{
               borderRadius: "40px",

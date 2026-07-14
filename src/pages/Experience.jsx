@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import {
   Box,
   Button,
+  Card,
   Modal,
   Typography,
 } from "@mui/material";
@@ -44,22 +45,22 @@ const Experience = () => {
   const handleClose = () => setOpen(false);
 
   return (
-    <Box style={lightGlassNavbar}>
-      <section className="section container" >
-        <h2>Experience</h2>
+    <Box sx={lightGlassNavbar}>
+      <section>
+        <h2 style={{ color: "rgba(0, 7, 12, 0.6)", }}>Experience</h2>
 
         <div style={styles.grid}>
           {experiences.map((p) => (
-            <div key={p} className="glass" style={styles.card}>
+            <Card key={p} className="glass" style={styles.card}>
               <Box
                 sx={{
                   display: "flex",
-                  alignItems: "center",   // 🔥 vertical alignment
-                  gap: 1.5,               // better than % for spacing
+                  alignItems: "center", 
+                  gap: 1.5,               
                 }}
               >
-                <CorporateFareIcon sx={{ fontSize: 28 }} />
-                <h3 style={{ margin: 0 }}>{p.company}</h3>
+                <CorporateFareIcon sx={{ fontSize: 28, color: "rgba(0, 7, 12, 0.6)", }} />
+                <h3 style={{ margin: 0, color: "rgba(0, 7, 12, 0.6)", }}>{p.company}</h3>
               </Box>
 
               <Button
@@ -70,7 +71,7 @@ const Experience = () => {
               >
                 View
               </Button>
-            </div>
+            </Card>
           ))}
         </div>
       </section>
@@ -113,12 +114,18 @@ const Experience = () => {
 const styles = {
   grid: {
     display: "grid",
-    gridTemplateColumns: "repeat(auto-fit,minmax(250px,1fr))",
-    gap: "20px",
+    gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
+    gap: 15,
+    width: "100%",
   },
 
   card: {
     padding: "20px",
+    borderRadius: "16px",
+    boxShadow: 24,
+    color: "#fff",
+    background:
+      "linear-gradient(135deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02))",
   },
 
   button: {
@@ -141,25 +148,24 @@ const styles = {
     left: "50%",
     transform: "translate(-50%, -50%)",
 
-    // ✅ Responsive width
     width: {
-      xs: "90%",   // mobile
-      sm: "80%",   // small screens
-      md: "500px", // desktop
+      xs: "90%",   
+      sm: "80%",  
+      md: "500px",
     },
 
-    // ✅ Prevent overflow
+   
     maxHeight: "85vh",
     overflowY: "auto",
 
-    // ✅ Responsive padding
+    
     p: {
       xs: 2,
       sm: 3,
       md: 4,
     },
 
-    // Glass UI ✨
+    
     background:
       "linear-gradient(177deg, rgb(35 60 120 / 85%), rgba(200, 214, 235, 0.6))",
     backdropFilter: "blur(18px)",
@@ -172,14 +178,19 @@ const styles = {
 };
 
 const lightGlassNavbar = {
-  minHeight: "84vh",
-  background:
-    "linear-gradient(177deg, rgba(129, 166, 227, 0.25), rgba(243, 236, 236, 0.15))",
+  minHeight: {
+    xs: "92dvh",  
+    sm: "100dvh",   
+    md: "92dvh",   
+    lg: "82vh",
+  },
+  background: "radial-gradient(circle, #bfcde9 0%, transparent 90%)",
   backdropFilter: "blur(16px)",
-  WebkitBackdropFilter: "blur(16px)",
+  WebkitBacpaddingkdropFilter: "blur(16px)",
   border: "1px solid rgba(255,255,255,0.2)",
   boxShadow: "0 4px 20px rgba(0,0,0,0.25)",
   position: "relative",
+  padding: '2%',
   "&::before": {
     content: '""',
     position: "absolute",
@@ -203,5 +214,4 @@ const lightGlassNavbar = {
     opacity: 0.7,
   },
 };
-
 export default Experience;

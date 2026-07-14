@@ -6,8 +6,8 @@ export const addContact = (data) => apiPost("/add-contact", data);
 export const getHireRequests = () => apiGet("/hire");
 export const addHireRequest = (data) => apiPost("/hire", data);
 
-export const getReviews = () => apiGet("/review");
-export const addReview = (data) => apiPost("/addreview", data);
+export const getReviews = () => apiGet("/reviews");
+export const addReview = (data) => apiPost("/reviews", data);
 export const updateReview = (id, data) =>
   apiPut(`/review/${id}`, data);
 

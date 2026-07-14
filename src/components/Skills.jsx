@@ -17,11 +17,11 @@ const Skills = () => {
     <>
       <section
         style={{
-          paddingLeft: "10%",
-          paddingRight: "10%",
+          paddingLeft: "5%",
+          paddingRight: "5%",
         }}
       >
-        <h2>Skills</h2>
+        <h2 style={{ color: "rgba(0, 7, 12, 0.6)", }}>Skills</h2>
 
         <div style={styles.grid}>
           {skillList.map((s) => (
@@ -32,8 +32,17 @@ const Skills = () => {
                 ...styles.card,
                 border:
                   hovered === s.tech
-                    ? "2px solid rgb(35 60 120 / 85%)"
-                    : "1px solid transparent",
+                    ? "2px solid rgba(99, 102, 241, 0.6),"
+                    : "2px solid rgba(99, 102, 241, 0.2)",
+                borderRadius:
+                  hovered === s.tech
+                    ? "20px"
+                    : "20px",
+                boxShadow:
+                  hovered === s.tech
+                    ? `0 20px 50px rgba(0,0,0,0.25),
+         0 0 50px rgba(99,102,241,0.4)`
+                    : `0 10px 20px rgba(0,0,0,0.1)`,
               }}
               onClick={() => handleOpen(s)}
               onMouseEnter={() => setHovered(s.tech)}
@@ -47,30 +56,32 @@ const Skills = () => {
             </div>
           ))}
         </div>
-      </section>
+      </section >
 
       {/* ✅ Modal */}
-      {selectedSkill && (
-        <div style={styles.overlay}>
-          <div className="glass" style={styles.modal}>
-            <h3>{selectedSkill.tech}</h3>
+      {
+        selectedSkill && (
+          <div style={styles.overlay}>
+            <div className="glass" style={styles.modal}>
+              <h3>{selectedSkill.tech}</h3>
 
-            <img
-              src={selectedSkill.image}
-              alt={selectedSkill.tech}
-              style={{ width: "60px", margin: "10px 0" }}
-            />
+              <img
+                src={selectedSkill.image}
+                alt={selectedSkill.tech}
+                style={{ width: "60px", margin: "10px 0" }}
+              />
 
-            <p style={{ marginTop: "10px", lineHeight: "1.6" }}>
-              {selectedSkill.description || "No description available."}
-            </p>
+              <p style={{ marginTop: "10px", lineHeight: "1.6" }}>
+                {selectedSkill.description || "No description available."}
+              </p>
 
-            <button style={styles.button} onClick={handleClose}>
-              Close
-            </button>
+              <button style={styles.button} onClick={handleClose}>
+                Close
+              </button>
+            </div>
           </div>
-        </div>
-      )}
+        )
+      }
     </>
   );
 };
@@ -79,7 +90,7 @@ const styles = {
   grid: {
     display: "grid",
     gridTemplateColumns: "repeat(auto-fit,minmax(120px,1fr))",
-    gap: "20px",
+    gap: "10px",
   },
   card: {
     padding: "15px",

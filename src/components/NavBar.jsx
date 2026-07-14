@@ -25,19 +25,40 @@ const NavBar = () => {
 
   const [open, setOpen] = useState(false);
   const [openResume, setOpenResume] = useState(false);
+  const [active, setActive] = useState(() => {
+    return localStorage.getItem("activeMenu") || "home";
+  });
+  const [activeItem, setActiveItem] = useState(() => {
+    return localStorage.getItem("activemenu") || "home";
+  });
 
-  // ✅ Resume handlers
   const handleOpenResume = () => setOpenResume(true);
   const handleCloseResume = () => setOpenResume(false);
 
   const handleDownload = () => {
+    const fileUrl = resume;
+
+    // 📱 Mobile (iOS Safari / Android)
+    if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
+      window.open(fileUrl, "_blank"); // opens in new tab (user can download manually)
+      return;
+    }
+
+    // 💻 Desktop
     const link = document.createElement("a");
-    link.href = resume;
-    link.download = "Prattyancha_Resume.pdf";
+    link.href = fileUrl;
+    link.setAttribute(
+      "download",
+      "Resume_Prattyancha_Patharkar_MERN_MEAN_5Years.pdf"
+    );
+    document.body.appendChild(link);
     link.click();
+    document.body.removeChild(link);
   };
 
   const handleNavigation = (item) => {
+    setActiveItem(item.section || item.label);
+    localStorage.setItem("activemenu", item.section);
     if (location.pathname === item.path && item.section) {
       const el = document.getElementById(item.section);
       if (el) el.scrollIntoView({ behavior: "smooth" });
@@ -55,22 +76,44 @@ const NavBar = () => {
             className="portfolio-logo"
             onClick={() => handleNavigation({ path: "/", section: "home" })}
           >
-            P<span>P</span>
+            P<span style={{
+              color: "#3a2274"
+            }}>P</span>
           </Typography>
 
           {/* Desktop */}
           <Box sx={{ display: { xs: "none", md: "flex" }, gap: 1 }}>
             {MenuItems.map((item) => (
-              <Button key={item.section} onClick={() => handleNavigation(item)} sx={{ color: 'white' }}>
+              <Button
+                key={item.section}
+                onClick={() => {
+                  setActive(item.section);
+                  localStorage.setItem("activeMenu", item.section);
+                  handleNavigation(item);
+                }}
+                sx={{
+                  color: active === item.section ? "#fff" : "rgba(255,255,255,0.7)",
+                  background:
+                    active === item.section
+                      ? "linear-gradient(90deg,#6366F1,#8B5CF6)"
+                      : "transparent",
+                  borderRadius: "20px",
+                  px: 2,
+                  transition: "0.3s",
+                  "&:hover": {
+                    background: "linear-gradient(90deg,#6366F1,#8B5CF6)",
+                    color: "#fff",
+                  },
+                }}
+              >
                 {item.section}
               </Button>
             ))}
-
-            <IconButton href="https://github.com/" target="_blank">
+            <IconButton href="https://github.com/Pprattyancha" target="_blank">
               <GitHubIcon />
             </IconButton>
 
-            <IconButton href="https://linkedin.com/" target="_blank">
+            <IconButton href="https://www.linkedin.com/in/prattyancha-patharkar/" target="_blank">
               <LinkedInIcon />
             </IconButton>
 
@@ -102,6 +145,7 @@ const NavBar = () => {
         handleNavigation={handleNavigation}
         handleOpenResume={handleOpenResume}
         handleDownload={handleDownload}
+        activeItem={activeItem}
       />
 
       {/* Resume Modal */}

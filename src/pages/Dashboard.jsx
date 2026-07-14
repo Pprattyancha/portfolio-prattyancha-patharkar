@@ -15,14 +15,29 @@ export default function Dashboard() {
   );
 }
 const lightGlassNavbar = {
-  minHeight: "84vh",
-  background:
-    "linear-gradient(177deg, rgba(129, 166, 227, 0.25), rgba(243, 236, 236, 0.15))",
+  minHeight: {
+    xs: "auto", 
+    sm: "100vh",   
+    md: "95vh",  
+    lg: "91vh"},   
+  background: {
+    xs: "linear-gradient(180deg, rgba(191,205,233,0.4), transparent)",
+    md: "radial-gradient(circle, #bfcde9 0%, transparent 90%)",
+  },
+
   backdropFilter: "blur(16px)",
   WebkitBackdropFilter: "blur(16px)",
+
   border: "1px solid rgba(255,255,255,0.2)",
-  boxShadow: "0 4px 20px rgba(0,0,0,0.25)",
+
+  boxShadow: {
+    xs: "0 2px 10px rgba(0,0,0,0.15)",
+    md: "0 4px 20px rgba(0,0,0,0.25)",
+  },
+
   position: "relative",
+  overflow: "hidden",
+
   "&::before": {
     content: '""',
     position: "absolute",
@@ -32,8 +47,9 @@ const lightGlassNavbar = {
     height: "1px",
     background:
       "linear-gradient(90deg, transparent, rgba(255,255,255,0.6), transparent)",
-    opacity: 0.7,
+    opacity: { xs: 0.5, md: 0.7 },
   },
+
   "&::after": {
     content: '""',
     position: "absolute",
@@ -43,6 +59,6 @@ const lightGlassNavbar = {
     height: "1px",
     background:
       "linear-gradient(90deg, transparent, rgba(255,255,255,0.6), transparent)",
-    opacity: 0.7,
+    opacity: { xs: 0.5, md: 0.7 },
   },
 };
