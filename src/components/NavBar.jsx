@@ -109,7 +109,7 @@ const NavBar = () => {
                 {item.section}
               </Button>
             ))}
-            <IconButton href="https://github.com/Pprattyancha/Pprattyancha/blob/main/README.md" target="_blank">
+            <IconButton href="https://github.com/Pprattyancha/Pprattyancha" target="_blank">
               <GitHubIcon />
             </IconButton>
 
