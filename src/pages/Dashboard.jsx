@@ -2,6 +2,7 @@
 import { Box } from "@mui/material";
 import Hero from "../components/Hero";
 import Skills from "../components/Skills";
+import MapComponent from "../components/MapComponent";
 
 export default function Dashboard() {
 
@@ -11,6 +12,7 @@ export default function Dashboard() {
     >
       <Hero />
       <Skills />
+      <MapComponent/>
     </Box>
   );
 }

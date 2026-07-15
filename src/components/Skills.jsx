@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { skillList } from "../services/skillList";
+import '../styles/glass.css'
 
 const Skills = () => {
   const [selectedSkill, setSelectedSkill] = useState(null);
@@ -23,7 +24,7 @@ const Skills = () => {
       >
         <h2 style={{ color: "rgba(0, 7, 12, 0.6)", }}>Skills</h2>
 
-        <div style={styles.grid}>
+        <div className="grid">
           {skillList.map((s) => (
             <div
               key={s.tech}
@@ -87,11 +88,6 @@ const Skills = () => {
 };
 
 const styles = {
-  grid: {
-    display: "grid",
-    gridTemplateColumns: "repeat(auto-fit,minmax(120px,1fr))",
-    gap: "10px",
-  },
   card: {
     padding: "15px",
     textAlign: "center",
